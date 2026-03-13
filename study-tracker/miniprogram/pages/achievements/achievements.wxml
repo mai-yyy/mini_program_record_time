@@ -1,0 +1,49 @@
+﻿<view class="container" style="{{themePageStyle}}">
+  <view class="hero-card">
+    <text class="hero-kicker">ACHIEVEMENT BADGES</text>
+    <text class="hero-title">成就</text>
+    <text class="hero-desc">累计学习与收集装扮都会解锁徽章，完成后会自动点亮。</text>
+    <view class="hero-metrics">
+      <view class="metric-chip">
+        <text class="metric-label">累计学习</text>
+        <text class="metric-value">{{totalDuration}}</text>
+      </view>
+      <view class="metric-chip">
+        <text class="metric-label">收集装扮</text>
+        <text class="metric-value">{{unlockedCount}} 项</text>
+      </view>
+      <view class="metric-chip">
+        <text class="metric-label">已解锁徽章</text>
+        <text class="metric-value">{{unlockedBadges}} / {{totalBadges}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card" style="{{themeCardStyle}}">
+    <text class="section-title">学习徽章</text>
+    <view class="badge-grid">
+      <view class="badge-card {{item.unlocked ? 'unlocked' : 'locked'}}" wx:for="{{studyBadges}}" wx:key="id">
+        <text class="badge-icon">{{item.icon}}</text>
+        <text class="badge-name">{{item.title}}</text>
+        <text class="badge-desc">{{item.desc}}</text>
+        <text class="badge-progress">{{item.progressText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card" style="{{themeCardStyle}}">
+    <text class="section-title">装扮徽章</text>
+    <view class="badge-grid">
+      <view class="badge-card {{item.unlocked ? 'unlocked' : 'locked'}}" wx:for="{{decorationBadges}}" wx:key="id">
+        <text class="badge-icon">{{item.icon}}</text>
+        <text class="badge-name">{{item.title}}</text>
+        <text class="badge-desc">{{item.desc}}</text>
+        <text class="badge-progress">{{item.progressText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{isLoading}}">
+    <text class="loading-text">加载成就中...</text>
+  </view>
+</view>

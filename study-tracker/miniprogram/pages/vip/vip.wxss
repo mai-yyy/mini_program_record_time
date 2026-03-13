@@ -1,0 +1,679 @@
+.container {
+  padding: 30rpx 0 48rpx;
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-bg.show {
+  opacity: 1.2;
+  filter: brightness(1.1) blur(6rpx);
+}
+
+.swiper-container {
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.left-arrow {
+  left: 10rpx;
+}
+
+.right-arrow {
+  right: 10rpx;
+}
+
+.arrow-text {
+  font-size: 60rpx;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 300;
+  text-shadow: 0 4rpx 8rpx rgba(255, 255, 255, 0.8);
+}
+
+.vip-swiper {
+  height: 520rpx;
+}
+
+.swiper-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-card {
+  width: 100%;
+  height: 480rpx;
+  border-radius: 40rpx;
+  padding: 40rpx;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: scale(0.9);
+  opacity: 0.65;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 16rpx 40rpx rgba(0, 0, 0, 0.15);
+  border: 2rpx solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+  transform: rotate(30deg);
+  pointer-events: none;
+}
+
+.hero-card.active {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 30rpx 60rpx rgba(0, 0, 0, 0.3);
+  border: 2rpx solid rgba(255, 255, 255, 0.4);
+}
+
+/* 镜面反光/光束特效 */
+.hero-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* 只有激活光束才会动，且等级越高光效越大越耀眼 */
+/* 0:见习, 1:普通, 2:黄金, 3:铂金, 4:钻石, 5:黑金 */
+.hero-card.active.tier-0::after,
+.hero-card.active.tier-1::after {
+  animation: mirror-sweep 6s infinite 1s;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+}
+.hero-card.active.tier-2::after {
+  animation: mirror-sweep 5s infinite 1s;
+  width: 80%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+}
+.hero-card.active.tier-3::after {
+  animation: mirror-sweep 4s infinite 1s;
+  width: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+}
+.hero-card.active.tier-4::after {
+  animation: mirror-sweep 3s infinite 0.5s;
+  width: 130%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+}
+.hero-card.active.tier-5::after {
+  animation: mirror-sweep 2.5s infinite 0s;
+  width: 160%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0) 100%);
+}
+
+@keyframes mirror-sweep {
+  0% { left: -150%; }
+  15% { left: 200%; }
+  100% { left: 200%; }
+}
+
+.card-icon-wrap {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 40rpx;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: inset 0 4rpx 10rpx rgba(255, 255, 255, 0.3), 0 12rpx 24rpx rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  transform: rotate(-5deg);
+}
+
+.hero-icon {
+  font-size: 88rpx;
+  text-shadow: 0 8rpx 16rpx rgba(0,0,0,0.2);
+  transform: rotate(5deg);
+}
+
+.hero-title {
+  font-size: 60rpx;
+  font-weight: 900;
+  display: block;
+  margin-bottom: 20rpx;
+  letter-spacing: 6rpx;
+  text-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+
+.hero-sub {
+  font-size: 26rpx;
+  opacity: 0.9;
+  display: block;
+  padding: 10rpx 36rpx;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999rpx;
+  backdrop-filter: blur(4px);
+}
+
+.current-badge {
+  position: absolute;
+  top: 36rpx;
+  right: -52rpx;
+  background: linear-gradient(135deg, #ff4757, #ff6b81);
+  color: #ffffff;
+  font-size: 22rpx;
+  font-weight: 800;
+  padding: 10rpx 60rpx;
+  transform: rotate(45deg);
+  box-shadow: 0 6rpx 16rpx rgba(255, 71, 87, 0.4);
+  letter-spacing: 2rpx;
+  z-index: 5;
+}
+
+.tier-progress-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 60rpx 40rpx 40rpx;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+  box-sizing: border-box;
+}
+
+.tier-progress-bg {
+  height: 14rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999rpx;
+  overflow: visible;
+  margin-bottom: 16rpx;
+  position: relative;
+  box-shadow: inset 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.tier-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.5), #ffffff);
+  border-radius: 999rpx;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  box-shadow: 0 0 12rpx rgba(255,255,255,0.6);
+}
+
+.tier-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: -8rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24rpx;
+  height: 24rpx;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 16rpx rgba(255,255,255,0.9);
+}
+
+.tier-progress-text {
+  font-size: 24rpx;
+  opacity: 0.95;
+  display: flex;
+  justify-content: space-between;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+
+.card {
+  margin: 0 30rpx;
+  padding: 40rpx;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 30rpx;
+  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.1);
+}
+
+.rules-card {
+  transition-delay: 0.05s;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #233044;
+}
+
+/* ─── 等级量化特权芯片 ─── */
+.perks-row {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 22rpx;
+  flex-wrap: wrap;
+}
+
+.perk-chip {
+  flex: 1;
+  min-width: 130rpx;
+  padding: 18rpx 16rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(135deg, rgba(74, 144, 217, 0.08), rgba(74, 144, 217, 0.14));
+  text-align: center;
+}
+
+.perk-value {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 900;
+  color: #243447;
+  letter-spacing: 1rpx;
+}
+
+.perk-label {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #7f8c8d;
+}
+
+/* ─── 图标化权益列表 ─── */
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 18rpx 16rpx;
+  border-radius: 18rpx;
+  background: rgba(240, 244, 248, 0.7);
+}
+
+.benefit-item.highlight {
+  background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.08));
+}
+
+.benefit-icon-wrap {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 16rpx;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.benefit-icon-wrap.highlight-icon {
+  background: linear-gradient(135deg, rgba(246, 211, 101, 0.3), rgba(243, 156, 18, 0.25));
+}
+
+.benefit-icon {
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.benefit-text {
+  font-size: 28rpx;
+  color: #2c3e50;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.benefit-item.highlight .benefit-text {
+  font-weight: 600;
+  color: #1a2535;
+}
+
+/* ─── 奖励卡片 ─── */
+.reward-card {
+  margin-top: 28rpx;
+  background: rgba(255, 255, 255, 0.94);
+  transition-delay: 0.15s;
+}
+
+.animate-prep {
+  opacity: 0;
+  transform: translateY(30rpx);
+}
+
+.animate-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reward-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.reward-status {
+  min-width: 120rpx;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  text-align: center;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.reward-status.available {
+  background: rgba(46, 204, 113, 0.14);
+  color: #1f9d57;
+}
+
+.reward-status.claimed {
+  background: rgba(74, 144, 217, 0.16);
+  color: #2d7bc4;
+}
+
+.reward-status.locked {
+  background: rgba(127, 140, 141, 0.14);
+  color: #7f8c8d;
+}
+
+.reward-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18rpx;
+  margin-top: 28rpx;
+}
+
+.reward-item {
+  background: linear-gradient(180deg, rgba(245, 247, 250, 0.95), rgba(235, 239, 244, 0.95));
+  border-radius: 24rpx;
+  padding: 24rpx 18rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 210rpx;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.reward-avatar-item {
+  justify-content: flex-start;
+}
+
+.reward-label {
+  font-size: 24rpx;
+  color: #7f8c8d;
+  margin-bottom: 16rpx;
+}
+
+.reward-avatar {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10rpx 24rpx rgba(0, 0, 0, 0.12);
+}
+
+.reward-avatar-text {
+  font-size: 50rpx;
+}
+
+.reward-name {
+  margin-top: 14rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #243447;
+}
+
+.reward-value {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.reward-sub {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+  color: #7f8c8d;
+}
+
+.reward-blindbox-item {
+  grid-column: 1 / -1;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 24rpx;
+}
+
+.blindbox-topline {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.blindbox-icon-wrap {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(246, 211, 101, 0.22), rgba(243, 156, 18, 0.26));
+  flex-shrink: 0;
+}
+
+.blindbox-icon {
+  font-size: 30rpx;
+  line-height: 1;
+}
+
+.blindbox-top-label {
+  margin-bottom: 0;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #51606f;
+}
+
+.blindbox-title {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 34rpx;
+  font-weight: 800;
+  color: #243447;
+  line-height: 1.25;
+}
+
+.blindbox-desc {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #7f8c8d;
+}
+
+.blindbox-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.blindbox-pill {
+  align-self: flex-start;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(74, 144, 217, 0.12);
+  color: #2d7bc4;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.blindbox-card-btn {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 72rpx;
+  line-height: 72rpx;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+  border-radius: 18rpx;
+  border: none;
+  background: linear-gradient(135deg, #4A90D9, #357ABD);
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blindbox-card-btn::after {
+  border: none;
+}
+
+.blindbox-card-btn.disabled {
+  background: rgba(149, 165, 166, 0.18);
+  color: #95a5a6;
+}
+
+.reward-summary {
+  display: flex;
+  gap: 18rpx;
+  margin-top: 22rpx;
+}
+
+.summary-chip {
+  flex: 1;
+  border-radius: 22rpx;
+  padding: 22rpx 24rpx;
+  background: rgba(34, 47, 62, 0.06);
+}
+
+.summary-label {
+  display: block;
+  font-size: 22rpx;
+  color: #7f8c8d;
+}
+
+.summary-value {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 34rpx;
+  font-weight: 800;
+  color: #111827;
+}
+
+.reward-tip {
+  display: block;
+  margin-top: 24rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #51606f;
+}
+
+.claim-btn {
+  margin-top: 24rpx;
+  height: 88rpx;
+  border-radius: 22rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 24rpx 0 0 0;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.claim-btn::after {
+  border: none;
+}
+
+.claim-btn.active {
+  background: linear-gradient(135deg, #f6d365, #f39c12);
+  color: #ffffff;
+  box-shadow: 0 14rpx 30rpx rgba(243, 156, 18, 0.28);
+}
+
+.claim-btn.claimed {
+  background: rgba(74, 144, 217, 0.14);
+  color: #2d7bc4;
+}
+
+.claim-btn.disabled {
+  background: rgba(149, 165, 166, 0.18);
+  color: #95a5a6;
+}
+
+@media (max-width: 420px) {
+  .perks-row {
+    gap: 10rpx;
+  }
+
+  .perk-chip {
+    min-width: 100rpx;
+    padding: 14rpx 12rpx;
+  }
+
+  .reward-item {
+    min-height: 170rpx;
+  }
+
+  .blindbox-card-btn {
+    font-size: 22rpx;
+  }
+
+  .reward-summary {
+    flex-direction: column;
+  }
+}

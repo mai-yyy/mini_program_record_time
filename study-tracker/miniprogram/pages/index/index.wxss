@@ -1,0 +1,328 @@
+/* 今日概览卡片 */
+.today-card {
+  color: #ffffff;
+  padding: 40rpx;
+  animation-delay: 0.1s;
+  position: relative;
+}
+
+.today-header {
+  margin-bottom: 20rpx;
+}
+
+/* 日期切换器 */
+.date-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-arrow {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 44rpx;
+  font-weight: bold;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.date-arrow:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.date-arrow-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.date-center {
+  flex: 1;
+  text-align: center;
+}
+
+.today-date {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.date-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  margin-top: 8rpx;
+}
+
+.date-label-tag {
+  font-size: 24rpx;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 4rpx 16rpx;
+  border-radius: 16rpx;
+  font-weight: 500;
+}
+
+.today-weekday {
+  font-size: 24rpx;
+  opacity: 0.85;
+}
+
+/* 皮肤角标 */
+.skin-badge {
+  text-align: center;
+  font-size: 22rpx;
+  opacity: 0.6;
+  margin-bottom: 8rpx;
+}
+
+.today-total-wrap {
+  text-align: center;
+  padding: 16rpx 0;
+}
+
+.today-label {
+  font-size: 26rpx;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.today-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.today-card .big-number {
+  font-size: 80rpx;
+}
+
+.today-card .big-unit {
+  font-size: 28rpx;
+  margin-left: 6rpx;
+}
+
+/* 进度条 */
+.progress-wrap {
+  margin-top: 24rpx;
+  padding: 0 10rpx;
+}
+
+.progress-bar-bg {
+  position: relative;
+  height: 20rpx;
+  border-radius: 10rpx;
+  overflow: visible;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 10rpx;
+  transition: width 0.5s ease;
+}
+
+.progress-tick {
+  position: absolute;
+  top: -6rpx;
+  transform: translateX(-50%);
+}
+
+.progress-tick-line {
+  width: 4rpx;
+  height: 32rpx;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 auto;
+}
+
+.progress-tick-label {
+  display: block;
+  font-size: 20rpx;
+  text-align: center;
+  margin-top: 6rpx;
+  white-space: nowrap;
+}
+
+.progress-info {
+  margin-top: 16rpx;
+  text-align: center;
+}
+
+.progress-current {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* 输入卡片 */
+.input-card {
+  padding: 36rpx 40rpx;
+  animation-delay: 0.2s;
+}
+
+.input-date-hint {
+  font-size: 24rpx;
+  color: #95a5a6;
+  font-weight: 400;
+}
+
+.time-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30rpx 0;
+}
+
+.time-input-item {
+  flex: 1;
+  text-align: center;
+}
+
+.time-label {
+  font-size: 24rpx;
+  color: #7f8c8d;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.time-picker {
+  background: #f8f9fa;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #bdc3c7;
+  border: 2rpx solid transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 4rpx 8rpx rgba(0,0,0,0.02);
+}
+
+.time-selected {
+  color: #2c3e50;
+  background: #eef5ff;
+  border: 2rpx solid #4A90D9;
+  box-shadow: 0 8rpx 20rpx rgba(74, 144, 217, 0.12);
+  transform: translateY(-2rpx);
+}
+
+.time-arrow {
+  font-size: 36rpx;
+  color: #bdc3c7;
+  padding: 0 20rpx;
+  margin-top: 30rpx;
+}
+
+/* 时长预览 */
+.duration-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+  background: #f0f9eb;
+  border-radius: 12rpx;
+}
+
+.duration-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.duration-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #67c23a;
+}
+
+.duration-error {
+  color: #e74c3c;
+}
+
+/* 今日记录列表 */
+.session-list-card {
+  animation-delay: 0.3s;
+}
+
+.session-list {
+  margin-top: 10rpx;
+}
+
+.session-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.session-item:last-child {
+  border-bottom: none;
+}
+
+.session-info {
+  flex: 1;
+}
+
+.session-time {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.session-time-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.session-time-sep {
+  margin: 0 16rpx;
+  color: #bdc3c7;
+  font-size: 28rpx;
+}
+
+.session-duration {
+  font-size: 26rpx;
+  color: #4A90D9;
+  font-weight: 500;
+}
+
+.session-discount {
+  font-size: 22rpx;
+  color: #e6a23c;
+  margin-top: 4rpx;
+}
+
+.session-delete {
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+  color: #e74c3c;
+  border: 1rpx solid #e74c3c;
+  border-radius: 20rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #7f8c8d;
+  margin-bottom: 12rpx;
+}
+
+.empty-sub {
+  font-size: 24rpx;
+  color: #bdc3c7;
+}

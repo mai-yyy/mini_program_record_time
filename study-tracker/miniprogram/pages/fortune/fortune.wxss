@@ -1,0 +1,487 @@
+.container {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 40rpx 30rpx 60rpx;
+  background:
+    radial-gradient(circle at top right, rgba(74, 144, 217, 0.12), transparent 28%),
+    linear-gradient(180deg, #f4f8fc 0%, #ebf1f7 100%);
+}
+
+.menu-view,
+.mode-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-hero,
+.mode-bar,
+.entry-grid,
+.quote-section,
+.sign-stage {
+  width: 100%;
+}
+
+.menu-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(74, 144, 217, 0.12);
+  color: #4A90D9;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.fortune-title {
+  margin-top: 24rpx;
+  text-align: center;
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #243447;
+}
+
+.fortune-subtitle {
+  margin-top: 12rpx;
+  margin-bottom: 42rpx;
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #7b8a99;
+}
+
+.animate-wrap .menu-hero,
+.animate-wrap .mode-view {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.entry-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22rpx;
+}
+
+.entry-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 34rpx;
+  padding: 34rpx 30rpx;
+  box-shadow: 0 20rpx 44rpx rgba(36, 52, 71, 0.08);
+}
+
+.entry-card::after {
+  content: '';
+  position: absolute;
+  right: -30rpx;
+  top: -30rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  opacity: 0.16;
+}
+
+.entry-card-primary {
+  background: linear-gradient(135deg, #ffffff, #eef5ff);
+}
+
+.entry-card-primary::after {
+  background: #4A90D9;
+}
+
+.entry-card-secondary {
+  background: linear-gradient(135deg, #ffffff, #fff3e8);
+}
+
+.entry-card-secondary::after {
+  background: #f39c12;
+}
+
+.entry-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry-pill {
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.72);
+  color: #51606f;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.entry-icon {
+  font-size: 54rpx;
+}
+
+.entry-title {
+  display: block;
+  margin-top: 26rpx;
+  font-size: 40rpx;
+  font-weight: 800;
+  color: #243447;
+}
+
+.entry-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #6b7a8c;
+}
+
+.entry-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28rpx;
+}
+
+.entry-cta {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #243447;
+}
+
+.entry-arrow {
+  font-size: 40rpx;
+  color: #9aa7b6;
+}
+
+.mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+
+.mode-back,
+.mode-switch {
+  padding: 12rpx 22rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.mode-back {
+  background: rgba(74, 144, 217, 0.1);
+  color: #4A90D9;
+}
+
+.mode-switch {
+  background: rgba(243, 156, 18, 0.12);
+  color: #e67e22;
+}
+
+.wheel-area {
+  position: relative;
+  width: 520rpx;
+  height: 520rpx;
+  margin-bottom: 50rpx;
+}
+
+.wheel-disc {
+  width: 520rpx;
+  height: 520rpx;
+  border-radius: 50%;
+  background: conic-gradient(
+    #f2321d 0deg 45deg,
+    #ec7d1b 45deg 90deg,
+    #f09e1c 90deg 135deg,
+    #35f41c 135deg 180deg,
+    #20e8f2 180deg 225deg,
+    #3f21ea 225deg 270deg,
+    #f31ce5 270deg 315deg,
+    #f81e4a 315deg 360deg
+  );
+  border: 10rpx solid #ffffff;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.seg-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  transform-origin: center center;
+}
+
+.seg-text {
+  position: absolute;
+  top: 40rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.4);
+}
+
+.pointer-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 520rpx;
+  height: 520rpx;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.pointer-arrow {
+  position: absolute;
+  top: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 18rpx solid transparent;
+  border-right: 18rpx solid transparent;
+  border-bottom: 190rpx solid #c0392b;
+  filter: drop-shadow(0 2rpx 6rpx rgba(0, 0, 0, 0.4));
+}
+
+.center-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  border: 6rpx solid #ffffff;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.3);
+}
+
+.center-text {
+  color: #ffffff;
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.spin-btn {
+  width: 400rpx;
+  height: 96rpx;
+  line-height: 65rpx;
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: #ffffff;
+  font-size: 34rpx;
+  font-weight: 700;
+  border: none;
+  border-radius: 48rpx;
+  box-shadow: 0 8rpx 24rpx rgba(231, 76, 60, 0.34);
+  letter-spacing: 2rpx;
+}
+
+.spin-btn::after {
+  border: none;
+}
+
+.spin-btn-disabled {
+  background: linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%) !important;
+  box-shadow: none !important;
+}
+
+.sign-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign-card {
+  width: 100%;
+  border-radius: 34rpx;
+  padding: 34rpx 30rpx;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  box-shadow: 0 20rpx 44rpx rgba(36, 52, 71, 0.08);
+}
+
+.sign-card.revealed {
+  background: linear-gradient(180deg, #ffffff, #fff8f1);
+}
+
+.sign-level {
+  display: block;
+  font-size: 24rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+}
+
+.sign-title {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 42rpx;
+  font-weight: 800;
+  color: #243447;
+}
+
+.sign-summary {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 28rpx;
+  line-height: 1.7;
+  color: #6b7a8c;
+}
+
+.sign-action-box {
+  margin-top: 28rpx;
+  padding: 22rpx 24rpx;
+  border-radius: 24rpx;
+  background: rgba(74, 144, 217, 0.08);
+}
+
+.sign-action-label {
+  display: block;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.sign-action-text {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #243447;
+}
+
+.sign-btn {
+  margin-top: 34rpx;
+}
+
+.quote-section {
+  margin-top: 90rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.quote-section.compact {
+  margin-top: 70rpx;
+}
+
+.fortune-disclaimer {
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 1.8;
+  color: #95a5a6;
+  margin-bottom: 34rpx;
+}
+
+.quote-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quote-text {
+  font-size: 34rpx;
+  line-height: 1.8;
+  text-align: center;
+  color: #34495e;
+  font-family: 'Kaiti', serif;
+  font-weight: 600;
+}
+
+.quote-author {
+  margin-top: 20rpx;
+  align-self: flex-end;
+  font-size: 28rpx;
+  color: #7f8c8d;
+}
+
+.result-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.result-card {
+  width: 520rpx;
+  border-radius: 30rpx;
+  padding: 60rpx 50rpx 40rpx;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.15);
+}
+
+.result-emoji {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.result-fortune {
+  font-size: 72rpx;
+  font-weight: 900;
+  margin-bottom: 20rpx;
+}
+
+.result-desc {
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin-bottom: 36rpx;
+}
+
+.result-close-btn {
+  width: 300rpx;
+  height: 80rpx;
+  line-height: 45rpx;
+  border-radius: 40rpx;
+  border: none;
+  background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.result-close-btn::after {
+  border: none;
+}
+
+@media (max-width: 420px) {
+  .wheel-area,
+  .wheel-disc,
+  .pointer-container {
+    width: 460rpx;
+    height: 460rpx;
+  }
+
+  .pointer-arrow {
+    border-bottom-width: 168rpx;
+  }
+
+  .fortune-title {
+    font-size: 42rpx;
+  }
+
+  .entry-title,
+  .sign-title {
+    font-size: 36rpx;
+  }
+}
+
+.admin-entry {
+  position: absolute;
+  bottom: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.2;
+  font-size: 32rpx;
+  padding: 20rpx;
+}

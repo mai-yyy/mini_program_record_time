@@ -1,0 +1,123 @@
+<view class="container {{animateTrigger ? 'tab-enter-active' : 'tab-enter-prep'}}">
+  <view wx:if="{{viewMode === 'menu'}}" class="menu-view">
+    <view class="menu-hero">
+      <view class="menu-badge">今日运势双入口</view>
+      <view class="fortune-title">今天想用哪种方式看运势？</view>
+      <view class="fortune-subtitle"></view>
+    </view>
+
+    <view class="entry-grid">
+      <view class="entry-card entry-card-primary" bindtap="openEntry" data-mode="wheel">
+        <view class="entry-head">
+          <text class="entry-pill">入口 1</text>
+          <text class="entry-icon">🎡</text>
+        </view>
+        <text class="entry-title">今日转盘</text>
+        <text class="entry-desc">转一下看看今天的学习运势。</text>
+        <view class="entry-footer">
+          <text class="entry-cta">打开转盘</text>
+          <text class="entry-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="entry-card entry-card-secondary" bindtap="openEntry" data-mode="sign">
+        <view class="entry-head">
+          <text class="entry-pill">入口 2</text>
+          <text class="entry-icon">🪄</text>
+        </view>
+        <text class="entry-title">今日学习签(娱乐版)</text>
+        <text class="entry-desc">抽一张学习签，给你一个更具体的行动建议和今日节奏。</text>
+        <view class="entry-footer">
+          <text class="entry-cta">去抽一签</text>
+          <text class="entry-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{viewMode === 'wheel'}}" class="mode-view">
+    <view class="mode-bar">
+      <view class="mode-back" bindtap="backToMenu">‹ 返回入口</view>
+      <view class="mode-switch" bindtap="openEntry" data-mode="sign">去学习签</view>
+    </view>
+
+    <view class="fortune-title">🎡 今日学习转盘</view>
+    <view class="fortune-subtitle">转动指针，看看今天的学习运势</view>
+
+    <view class="wheel-area">
+      <view class="wheel-disc">
+        <view class="seg-label" wx:for="{{fortunes}}" wx:key="index" style="transform: rotate({{index * segDeg + segDeg / 2}}deg);">
+          <text class="seg-text">{{item.text}}</text>
+        </view>
+      </view>
+
+      <view class="pointer-container" animation="{{pointerAnimation}}">
+        <view class="pointer-arrow"></view>
+      </view>
+
+      <view class="center-btn" bindtap="onSpin">
+        <text class="center-text">{{isSpinning ? '...' : 'GO'}}</text>
+      </view>
+    </view>
+
+    <button class="spin-btn {{isSpinning ? 'spin-btn-disabled' : ''}}" bindtap="onSpin" disabled="{{isSpinning}}">
+      {{isSpinning ? '转动中...' : '开始转动'}}
+    </button>
+
+    <view class="quote-section">
+      <view class="fortune-disclaimer">温馨提示：运势仅供娱乐，学习还是要靠自己努力。</view>
+      <view class="quote-card">
+        <view class="quote-text">{{quote.text}}</view>
+        <view class="quote-author">—— {{quote.author}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{viewMode === 'sign'}}" class="mode-view">
+    <view class="mode-bar">
+      <view class="mode-back" bindtap="backToMenu">‹ 返回入口</view>
+      <view class="mode-switch" bindtap="openEntry" data-mode="wheel">去转盘</view>
+    </view>
+
+    <view class="fortune-title">🪄 今日学习签</view>
+    <view class="fortune-subtitle">抽一张签，看看今天更适合怎么学。</view>
+
+    <view class="sign-stage">
+      <view class="sign-card {{currentSign ? 'revealed' : ''}}">
+        <text class="sign-level" wx:if="{{currentSign}}" style="color: {{currentSign.accent}}">{{currentSign.level}}</text>
+        <text class="sign-title">{{currentSign ? currentSign.title : '今日签位待开启'}}</text>
+        <text class="sign-summary">{{currentSign ? currentSign.summary : '点击下方按钮，随机抽取一张属于今天的学习签。'}}</text>
+
+        <view class="sign-action-box" wx:if="{{currentSign}}">
+          <text class="sign-action-label" style="color: {{currentSign.accent}}">今日建议</text>
+          <text class="sign-action-text">{{currentSign.action}}</text>
+        </view>
+      </view>
+
+      <button class="spin-btn sign-btn {{isDrawingSign ? 'spin-btn-disabled' : ''}}" bindtap="drawStudySign" disabled="{{isDrawingSign}}">
+        {{isDrawingSign ? '抽签中...' : '抽一张学习签'}}
+      </button>
+    </view>
+
+    <view class="quote-section compact">
+      <view class="fortune-disclaimer">学习签偏向行动建议，适合你在状态一般时快速进入任务。</view>
+      <view class="quote-card">
+        <view class="quote-text">{{quote.text}}</view>
+        <view class="quote-author">—— {{quote.author}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="result-mask" wx:if="{{showResult}}" bindtap="onCloseResult">
+    <view class="result-card" catchtap="">
+      <view class="result-emoji">🎯</view>
+      <view class="result-fortune" style="color: {{result.color}};">{{result.text}}</view>
+      <view class="result-desc">{{result.desc}}</view>
+      <button class="result-close-btn" bindtap="onCloseResult">知道了</button>
+    </view>
+  </view>
+
+  <view class="admin-entry" bindtap="onAdminTap">
+    <text>⚙️</text>
+  </view>
+</view>

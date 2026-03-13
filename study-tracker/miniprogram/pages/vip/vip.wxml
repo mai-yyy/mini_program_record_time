@@ -1,0 +1,128 @@
+<view class="container">
+  <image wx:for="{{tiers}}" wx:key="level" class="page-bg {{activeTierIndex === index ? 'show' : ''}}" src="{{item.bgImage}}" mode="aspectFill"></image>
+
+  <view class="swiper-container">
+    <view class="arrow left-arrow" bindtap="prevTier" wx:if="{{activeTierIndex > 0}}">
+      <text class="arrow-text">‹</text>
+    </view>
+    <swiper class="vip-swiper" current="{{currentSwiperIndex}}" bindchange="onSwiperChange" previous-margin="30rpx" next-margin="30rpx">
+      <swiper-item wx:for="{{tiers}}" wx:key="level" class="swiper-item">
+        <view class="hero-card tier-{{index}} {{activeTierIndex === index ? 'active' : ''}}" style="background: {{item.cardBg}}; color: {{item.color}}">
+          <view class="card-icon-wrap">
+            <text class="hero-icon">{{item.icon}}</text>
+          </view>
+          <text class="hero-title">{{item.level}}</text>
+          <text class="hero-sub" wx:if="{{item.reqHours > 0}}">解锁需要 {{item.reqHours}} 小时</text>
+          <text class="hero-sub" wx:else>默认等级</text>
+
+          <view class="current-badge" wx:if="{{currentLevel === item.level}}">
+            当前等级
+          </view>
+
+          <view class="tier-progress-wrap" wx:if="{{item.reqHours > 0}}">
+            <view class="tier-progress-bg">
+              <view class="tier-progress-fill" style="width: {{cumulativeHours >= item.reqHours ? 100 : (cumulativeHours / item.reqHours * 100)}}%"></view>
+            </view>
+            <view class="tier-progress-text">
+              <text wx:if="{{cumulativeHours >= item.reqHours}}">已解锁</text>
+              <text wx:else>进度: {{cumulativeHours}} / {{item.reqHours}} 小时</text>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+    <view class="arrow right-arrow" bindtap="nextTier" wx:if="{{activeTierIndex < tiers.length - 1}}">
+      <text class="arrow-text">›</text>
+    </view>
+  </view>
+
+  <view class="card rules-card {{panelAnimate ? 'animate-active' : 'animate-prep'}}">
+    <view class="section-title">✨ {{tiers[activeTierIndex].level}} 专属权益</view>
+
+    <!-- 量化特权芯片 -->
+    <view class="perks-row">
+      <view class="perk-chip" wx:for="{{tiers[activeTierIndex].perks}}" wx:key="label" wx:for-item="perk">
+        <text class="perk-value">{{perk.value}}</text>
+        <text class="perk-label">{{perk.label}}</text>
+      </view>
+    </view>
+
+    <!-- 权益列表（图标 + 说明） -->
+    <view class="benefit-list">
+      <view class="benefit-item {{benefit.highlight ? 'highlight' : ''}}" wx:for="{{tiers[activeTierIndex].benefits}}" wx:key="text" wx:for-item="benefit">
+        <view class="benefit-icon-wrap {{benefit.highlight ? 'highlight-icon' : ''}}">
+          <text class="benefit-icon">{{benefit.icon}}</text>
+        </view>
+        <text class="benefit-text">{{benefit.text}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card reward-card {{panelAnimate ? 'animate-active' : 'animate-prep'}}" wx:if="{{rewardTier}}">
+    <view class="reward-header">
+      <text class="section-title">🎁 {{rewardTier.level}} 升级奖励</text>
+      <view class="reward-status {{rewardStatusClass}}">
+        <text>{{rewardStatusText}}</text>
+      </view>
+    </view>
+
+    <view class="reward-grid">
+      <view class="reward-item reward-avatar-item">
+        <text class="reward-label">奖励头像</text>
+        <view class="reward-avatar" style="background: {{rewardTier.reward.avatarBg}}">
+          <text class="reward-avatar-text">{{rewardTier.reward.avatarText}}</text>
+        </view>
+        <text class="reward-name">{{rewardTier.reward.avatarName}}</text>
+      </view>
+
+      <view class="reward-item">
+        <text class="reward-label">奖励点数</text>
+        <text class="reward-value">+{{rewardTier.reward.points}}</text>
+        <text class="reward-sub">按等级每次 +2 递增</text>
+      </view>
+
+      <view class="reward-item" wx:if="{{hasRewardMultiplier}}">
+        <text class="reward-label">奖励倍率</text>
+        <text class="reward-value">×{{rewardTierMultiplier}}</text>
+        <text class="reward-sub">领取后立即生效</text>
+      </view>
+
+      <view class="reward-item" wx:if="{{hasTimerSkinReward}}">
+        <text class="reward-label">计时皮肤</text>
+        <text class="reward-value">{{rewardTier.reward.timerSkin.name}}</text>
+        <text class="reward-sub">个人信息页更换</text>
+      </view>
+
+      <view class="reward-item reward-blindbox-item" wx:if="{{hasBlindBoxReward}}">
+        <view class="blindbox-topline">
+          <view class="blindbox-icon-wrap">
+            <text class="blindbox-icon">🎁</text>
+          </view>
+          <text class="reward-label blindbox-top-label">盲盒特权</text>
+        </view>
+        <text class="blindbox-title">神秘盲盒</text>
+        <text class="blindbox-desc">{{rewardTier.reward.blindBox.desc}}</text>
+        <view class="blindbox-footer">
+          <view class="blindbox-pill">
+            <text>每日 {{rewardTier.reward.blindBox.dailyFreePulls}} 次</text>
+          </view>
+          <button class="blindbox-card-btn {{blindBoxButtonDisabled ? 'disabled' : ''}}" bindtap="onGoMall" disabled="{{blindBoxButtonDisabled}}">{{blindBoxButtonText}}</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="reward-summary">
+      <view class="summary-chip">
+        <text class="summary-label">累计已领点数</text>
+        <text class="summary-value">{{totalRewardPoints}}</text>
+      </view>
+      <view class="summary-chip">
+        <text class="summary-label">当前生效倍率</text>
+        <text class="summary-value">×{{activeMultiplier}}</text>
+      </view>
+    </view>
+
+    <text class="reward-tip">{{rewardStatusDesc}}</text>
+    <button class="claim-btn {{rewardButtonClass}}" bindtap="onClaimReward" disabled="{{rewardButtonDisabled}}">{{rewardButtonText}}</button>
+  </view>
+</view>

@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">☁️ 极速数据修改 (云端管理员)</view>
+    <view class="form-group">
+      <text class="form-label">目标用户 OpenID (留空则修改自己)</text>
+      <input class="form-input" placeholder="留空默认自己" bindinput="onInputOpenId" value="{{targetOpenId}}" />
+    </view>
+    
+    <view class="form-group">
+      <text class="form-label">1. 模拟增加学习时长 (快捷刷等级)</text>
+      <view style="display: flex; gap: 20rpx; margin-bottom: 20rpx;">
+        <input type="number" class="form-input" style="flex: 1; margin: 0;" placeholder="输入小时数 (如 10)" bindinput="onInputHours" value="{{addHours}}" />
+      </view>
+      <button class="btn-primary" bindtap="onAddStudyTime">注入学习时长</button>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">2. 修改商城点数 (充值)</text>
+      <view style="display: flex; gap: 20rpx; margin-bottom: 20rpx;">
+        <input type="number" class="form-input" style="flex: 1; margin: 0;" placeholder="输入点数 (如 100)" bindinput="onInputPoints" value="{{addPoints}}" />
+      </view>
+      <button class="btn-primary" bindtap="onAddMallPoints">充值点数</button>
+    </view>
+    
+    <view class="form-group no-border">
+      <text class="form-label">3. 恢复盲盒次数 / 清理测试记录</text>
+      <button class="btn-primary" style="background:#2ecc71; margin-bottom: 20rpx;" bindtap="onResetFreePulls">恢复当日盲盒免费次数</button>
+      <button class="btn-primary" style="background:#e74c3c" bindtap="onResetAllData">⚠️ 彻底重置该账号所有数据</button>
+    </view>
+  </view>
+</view>

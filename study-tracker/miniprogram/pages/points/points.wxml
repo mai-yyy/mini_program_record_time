@@ -1,0 +1,87 @@
+﻿<view class="container">
+  <view class="points-hero">
+    <text class="points-label">当前可用点数</text>
+    <view class="points-value-wrap">
+      <text class="points-value">{{monthPoints}}</text>
+      <text class="points-unit">点</text>
+    </view>
+    <text class="points-hint">已计入升级奖励、盲盒返还和商城消费，页面会实时同步。</text>
+  </view>
+
+  <view class="card detail-card">
+    <view class="section-title">📳 当前点数明细</view>
+
+    <view class="detail-item">
+      <text class="detail-label">本月累计学习</text>
+      <text class="detail-value">{{monthDisplay}}</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="detail-label">当前会员倍率</text>
+      <text class="detail-value discount">×{{currentMultiplier}}</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="detail-label">折算后时长</text>
+      <text class="detail-value discount">{{monthDiscountDisplay}}，{{monthDiscountMin}}分钟</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="detail-label">学习获得点数</text>
+      <text class="detail-value">{{studyPoints}} 点</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="detail-label">升级奖励点数</text>
+      <text class="detail-value positive">+{{rewardPoints}} 点</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="detail-label">学习与会员累计</text>
+      <text class="detail-value highlight">{{grossPoints}} 点</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="detail-label">盲盒返还点数</text>
+      <text class="detail-value positive">+{{blindBoxBonusPoints}} 点</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="detail-label">商城已消费</text>
+      <text class="detail-value negative">-{{spentPoints}} 点</text>
+    </view>
+
+    <view class="detail-item" style="border-bottom:none;">
+      <text class="detail-label">当前可用点数</text>
+      <text class="detail-value highlight">{{monthPoints}} 点</text>
+    </view>
+  </view>
+
+  <view class="card rules-card">
+    <view class="section-title">📌 点数规则说明</view>
+
+    <view class="rule-item">
+      <text class="rule-num">1</text>
+      <text class="rule-text">当前可用点数 = 学习点数 + 升级奖励点数 + 盲盒返还点数 - 商城消费点数</text>
+    </view>
+
+    <view class="rule-item">
+      <text class="rule-num">2</text>
+      <text class="rule-text">学习时间会按当前会员倍率折算，每满 1 小时获得 1 点学习点数</text>
+    </view>
+
+    <view class="rule-item">
+      <text class="rule-num">3</text>
+      <text class="rule-text">升级奖励点数按等级每次 +2 递增，见习会员进入会员中心即可领取 2 点</text>
+    </view>
+
+    <view class="rule-item">
+      <text class="rule-num">4</text>
+      <text class="rule-text">商城头像和主题购买后会出现在个人信息页中，盲盒概率以商城公示为准</text>
+    </view>
+  </view>
+
+  <view class="footer-tip">
+    <text>💡 盲盒返还与商城消费都会实时回写到当前可用点数</text>
+  </view>
+</view>

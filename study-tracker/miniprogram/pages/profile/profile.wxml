@@ -1,0 +1,79 @@
+<view class="container {{animateTrigger ? 'tab-enter-active' : 'tab-enter-prep'}}" style="{{themePageStyle}}">
+  <view class="card vip-card section-block" bindtap="onTapVip">
+    <image class="vip-card-bg" src="{{memberBg}}" mode="aspectFill"></image>
+    <view class="vip-card-content">
+      <view class="vip-main">
+        <view class="vip-copy">
+          <text class="section-title">👑 会员中心</text>
+          <text class="vip-level">{{memberLevel}}</text>
+        </view>
+        <text class="arrow">></text>
+      </view>
+      <text class="vip-desc">查看规则、权益与升级奖励</text>
+    </view>
+  </view>
+
+  <view class="card profile-card section-block" style="{{themeCardStyle}}">
+    <view class="avatar-wrap" bindtap="onTapEditProfile">
+      <view class="avatar-left">
+        <view class="avatar" style="background: {{avatarBg}}">
+          <text class="avatar-text">{{avatarText}}</text>
+        </view>
+        <view class="profile-info">
+          <view class="name-row">
+            <text class="profile-name">{{name}}</text>
+            <text class="profile-gender" wx:if="{{gender}}">{{gender === '男' ? '♂️' : (gender === '女' ? '♀️' : '')}}</text>
+          </view>
+          <text class="profile-sub">欢迎尊贵的{{memberLevel}}！</text>
+          <text class="profile-motto" wx:if="{{motto}}">{{motto}}</text>
+        </view>
+      </view>
+
+      <view class="profile-edit-btn">
+        <text>个人信息</text>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <view class="stats-grid section-block">
+    <view class="card stat-card compact-card" style="{{themeCardStyle}}" bindtap="onTapPoints">
+      <text class="stat-icon">⭐</text>
+      <text class="stat-value compact">{{studyPoints}}</text>
+      <text class="stat-label">可用点数 ▸</text>
+    </view>
+
+    <view class="card stat-card compact-card achievement-entry" style="{{themeCardStyle}}" bindtap="onTapAchievements">
+      <text class="stat-icon">🏆</text>
+      <view class="achievement-entry-row">
+        <text class="achievement-entry-title">成就</text>
+        <text class="achievement-entry-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card action-card section-block" style="{{themeCardStyle}}" bindtap="onTapMall">
+    <view class="section-title">🛒 商城</view>
+    <view class="action-row">
+      <view class="action-left">
+        <text class="action-desc">使用点数兑换精美奖品</text>
+      </view>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <view class="card action-card section-block" style="{{themeCardStyle}}" bindtap="onTapAbout">
+    <view class="section-title">💡 关于</view>
+    <view class="action-row">
+      <view class="action-left">
+        <text class="action-desc">作者信息与项目说明</text>
+      </view>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{isLoading}}">
+    <text class="loading-text">加载统计中...</text>
+  </view>
+</view>
+

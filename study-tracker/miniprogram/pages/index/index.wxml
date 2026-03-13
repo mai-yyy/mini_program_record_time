@@ -1,0 +1,119 @@
+<view class="container {{animateTrigger ? 'tab-enter-active' : 'tab-enter-prep'}}">
+  <view class="card today-card" style="background: {{skinCardBg}};">
+    <view class="today-header">
+      <view class="date-switcher">
+        <view class="date-arrow {{canGoPrev ? '' : 'date-arrow-hidden'}}" bindtap="onPrevDate" style="color: {{skinNumberColor}}; background: {{skinProgressBg}};">
+          <text>‹</text>
+        </view>
+        <view class="date-center">
+          <view class="today-date" style="color: {{skinNumberColor}};">{{todayCN}}</view>
+          <view class="date-meta">
+            <text class="date-label-tag" style="color: {{skinLabelColor}};">{{dateLabel}}</text>
+            <text class="today-weekday" style="color: {{skinLabelColor}};">{{weekDay}}</text>
+          </view>
+        </view>
+        <view class="date-arrow {{canGoNext ? '' : 'date-arrow-hidden'}}" bindtap="onNextDate" style="color: {{skinNumberColor}}; background: {{skinProgressBg}};">
+          <text>›</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="today-total-wrap">
+      <text class="today-label" style="color: {{skinLabelColor}};">{{dateLabel}}累计学习</text>
+      <view class="today-total" style="{{skinFontFamily}}">
+        <block wx:if="{{todayHours > 0}}">
+          <text class="big-number" style="color: {{skinNumberColor}};">{{todayHours}}</text>
+          <text class="big-unit" style="color: {{skinUnitColor}};">小时</text>
+        </block>
+        <block wx:if="{{todayHours > 0 && todayMinutes > 0}}">
+          <text class="big-number" style="font-size:48rpx;margin-left:12rpx;color: {{skinNumberColor}};">{{todayMinutes}}</text>
+          <text class="big-unit" style="color: {{skinUnitColor}};">分钟</text>
+        </block>
+        <block wx:if="{{todayHours <= 0}}">
+          <text class="big-number" style="color: {{skinNumberColor}};">{{todayMinutes}}</text>
+          <text class="big-unit" style="color: {{skinUnitColor}};">分钟</text>
+        </block>
+      </view>
+    </view>
+
+    <view class="skin-badge" style="color: {{skinLabelColor}};">
+      <text>{{skinIcon}} {{skinName}}</text>
+    </view>
+
+    <view class="progress-wrap">
+      <view class="progress-bar-bg" style="background: {{skinProgressBg}};">
+        <view class="progress-bar-fill" style="width: {{progressPercent > 100 ? 100 : progressPercent}}%; background: {{skinProgressFill}};"></view>
+        <view class="progress-tick" style="left: 75%;">
+          <view class="progress-tick-line"></view>
+          <text class="progress-tick-label" style="color: {{skinLabelColor}};">300分钟</text>
+        </view>
+        <view class="progress-tick" style="left: 100%;">
+          <view class="progress-tick-line"></view>
+          <text class="progress-tick-label" style="color: {{skinLabelColor}};">400分钟</text>
+        </view>
+      </view>
+      <view class="progress-info">
+        <text class="progress-current" style="color: {{skinLabelColor}};">{{todayTotal}}分钟</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card input-card">
+    <view class="section-title">📝 记录学习时间 <text class="input-date-hint">（{{dateLabel}} {{todayCN}}）</text></view>
+
+    <view class="time-input-row">
+      <view class="time-input-item">
+        <text class="time-label">开始时间</text>
+        <picker mode="time" value="{{startTime}}" bindchange="onStartTimeChange">
+          <view class="time-picker {{startTime ? 'time-selected' : ''}}">
+            {{startTime || '请选择'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="time-arrow">→</view>
+
+      <view class="time-input-item">
+        <text class="time-label">结束时间</text>
+        <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+          <view class="time-picker {{endTime ? 'time-selected' : ''}}">
+            {{endTime || '请选择'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="duration-preview" wx:if="{{currentDuration}}">
+      <text class="duration-icon">⏱</text>
+      <text class="duration-text {{canSave ? '' : 'duration-error'}}">{{currentDuration}}</text>
+    </view>
+
+    <button class="btn-primary" disabled="{{!canSave}}" bindtap="onSave">保存记录</button>
+  </view>
+
+  <view class="card session-list-card" wx:if="{{todaySessions.length > 0}}">
+    <view class="section-title">📋 {{dateLabel}}学习记录</view>
+    <view class="session-list">
+      <view class="session-item" wx:for="{{todaySessions}}" wx:key="_id">
+        <view class="session-info">
+          <view class="session-time">
+            <text class="session-time-text">{{item.startTime}}</text>
+            <text class="session-time-sep">-</text>
+            <text class="session-time-text">{{item.endTime}}</text>
+          </view>
+          <view class="session-duration">{{item.durationDisplay}}</view>
+          <view class="session-discount">折算: {{item.discountDisplay}}，{{item.discountMinutes}}分钟 (×{{currentMultiplier}}倍率)</view>
+        </view>
+        <view class="session-delete" bindtap="onDelete" data-id="{{item._id}}">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{!isLoading && todaySessions.length === 0}}">
+    <text class="empty-icon">📖</text>
+    <text class="empty-text">{{dateLabel}}还没有学习记录</text>
+    <text class="empty-sub">选择开始和结束时间来记录学习吧</text>
+  </view>
+</view>

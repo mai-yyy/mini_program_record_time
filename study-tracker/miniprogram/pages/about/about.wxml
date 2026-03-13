@@ -1,0 +1,69 @@
+<view class="container">
+
+  <!-- 头像区域 -->
+  <view class="hero-section">
+    <view class="hero-bg"></view>
+    <view class="hero-avatar">
+      <text class="avatar-char">M</text>
+    </view>
+    <text class="hero-name">Yan</text>
+    <text class="hero-motto">以初心赴热爱，以坚持赴远方。</text>
+  </view>
+
+  <!-- 身份标签 -->
+  <view class="tags-wrap">
+    <text class="tag tag-dev">⚡ Developer</text>
+    <text class="tag tag-football">⚽ 足球迷</text>
+    <text class="tag tag-code">🧠 终身学习者</text>
+  </view>
+
+  <!-- 个人信息卡片 -->
+  <view class="info-card">
+    <view class="info-item">
+      <view class="info-icon-wrap" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+        <text class="info-icon">💬</text>
+      </view>
+      <view class="info-content">
+        <text class="info-label">BUG请联系QQ</text>
+        <text class="info-value">1306640926</text>
+      </view>
+      <view class="info-action" bindtap="onCopyQQ">
+        <text>复制</text>
+      </view>
+    </view>
+
+    <view class="info-item">
+      <view class="info-icon-wrap" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+        <text class="info-icon">⚽</text>
+      </view>
+      <view class="info-content">
+        <text class="info-label">兴趣爱好</text>
+        <text class="info-value">足球 游戏</text>
+      </view>
+    </view>
+
+    <view class="info-item" style="border-bottom:none;">
+      <view class="info-icon-wrap" style="background: linear-gradient(135deg, #e67e22, #d35400);">
+        <text class="info-icon">🚀</text>
+      </view>
+      <view class="info-content">
+        <text class="info-label">关于这个小程序</text>
+        <text class="info-value">用代码帮助您学习，用数据驱动您成长</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 酷炫语录 -->
+  <view class="quote-card">
+    <text class="quote-mark">"</text>
+    <text class="quote-content">且停且忘且随风，且行且看且从容，希望大家不必光芒万丈，但始终温暖有光，所有努力，皆有回响。追光的人，终会万丈光芒，加油！行而不辍，未来可期。</text>
+    <text class="quote-mark-end">"</text>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer">
+    <text class="footer-text">Made with ❤️ by 麦哥哥</text>
+    <text class="footer-version">v1.0.0</text>
+  </view>
+
+</view>

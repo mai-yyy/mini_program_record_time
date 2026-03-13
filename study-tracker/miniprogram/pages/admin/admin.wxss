@@ -1,0 +1,46 @@
+.container {
+  padding: 30rpx;
+  background: #f2f6fb;
+  min-height: 100vh;
+}
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+.form-group {
+  margin-bottom: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  padding-bottom: 20rpx;
+}
+.form-group.no-border {
+  border-bottom: none;
+}
+.form-label {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+.form-input {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+  border: 1px solid #e1e8ed;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #4a90d9, #357abd);
+  color: #fff;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}

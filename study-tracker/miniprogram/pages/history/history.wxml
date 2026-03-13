@@ -1,0 +1,43 @@
+<view class="container {{animateTrigger ? 'tab-enter-active' : 'tab-enter-prep'}}">
+  <view class="page-header">
+    <text class="page-title">📅 学习历史</text>
+  </view>
+
+  <view class="day-card card" wx:for="{{records}}" wx:key="date" style="--index: {{index}}">
+    <view class="day-header">
+      <view class="day-date-info">
+        <text class="day-date">{{item.dateCN}}</text>
+        <text class="day-weekday">{{item.weekDay}}</text>
+      </view>
+      <view class="day-total-right">
+        <view class="day-total-badge">
+          <text>{{item.totalDisplay}}</text>
+        </view>
+        <view class="day-discount-text">{{item.discountDisplay}}，{{item.discountMinutes}}分钟</view>
+        <view class="day-discount-rate">(×{{currentMultiplier}}倍率)</view>
+      </view>
+    </view>
+
+    <view class="day-sessions">
+      <view class="day-session-item" wx:for="{{item.sessions}}" wx:for-item="session" wx:key="_id">
+        <view class="day-session-dot"></view>
+        <view class="day-session-info">
+          <text class="day-session-time">{{session.startTime}} - {{session.endTime}}</text>
+        </view>
+        <view class="day-session-delete" bindtap="onDelete" data-id="{{session._id}}">
+          <text>×</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{isLoading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view class="empty-state" wx:if="{{!isLoading && records.length === 0}}">
+    <text class="empty-icon">📭</text>
+    <text class="empty-text">暂无学习记录</text>
+    <text class="empty-sub">去首页记录第一次学习吧</text>
+  </view>
+</view>

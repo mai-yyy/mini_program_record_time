@@ -1,0 +1,130 @@
+<view class="container" style="{{themePageStyle}}">
+  <view class="card edit-card" style="{{themeCardStyle}}">
+    <view class="section-head">
+      <view>
+        <text class="section-title">头像设置</text>
+        <text class="section-sub">会员头像按学习时长解锁，商城头像购买后也会出现在这里。</text>
+      </view>
+    </view>
+
+    <view class="avatar-grid">
+      <view
+        class="avatar-option {{selectedAvatarId === item.id ? 'active' : ''}} {{!item.unlocked ? 'locked' : ''}}"
+        wx:for="{{avatarList}}"
+        wx:key="id"
+        bindtap="onSelectAvatar"
+        data-item="{{item}}"
+      >
+        <view class="avatar-shell" style="background: {{item.bg}}">
+          <text class="avatar-emoji">{{item.text}}</text>
+        </view>
+        <text class="avatar-name">{{item.name}}</text>
+        <text class="avatar-badge {{item.unlockType === 'shop' ? 'shop' : 'member'}}">{{item.badgeText}}</text>
+        <view class="check-icon" wx:if="{{selectedAvatarId === item.id && item.unlocked}}">✓</view>
+        <view class="lock-mask" wx:if="{{!item.unlocked}}">
+          <text class="lock-text">{{item.lockText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card edit-card" style="{{themeCardStyle}}">
+    <view class="section-head">
+      <view>
+        <text class="section-title">页面底色</text>
+        <text class="section-sub">这里的配色会改变个人信息页和“我的”页面的大底与卡片底色，不会改头像背景。</text>
+      </view>
+    </view>
+
+    <view class="theme-grid">
+      <view
+        class="theme-option {{selectedThemeId === item.id ? 'active' : ''}} {{!item.unlocked ? 'locked' : ''}}"
+        wx:for="{{themeList}}"
+        wx:key="id"
+        bindtap="onSelectTheme"
+        data-item="{{item}}"
+      >
+        <view class="theme-preview" style="background: {{item.bg}}"></view>
+        <view class="theme-copy">
+          <text class="theme-name">{{item.name}}</text>
+          <text class="theme-desc">{{item.desc}}</text>
+        </view>
+        <text class="theme-tag {{item.unlockType === 'shop' ? 'shop' : 'default'}}">{{item.badgeText}}</text>
+        <view class="theme-check" wx:if="{{selectedThemeId === item.id && item.unlocked}}">当前</view>
+        <view class="theme-lock" wx:if="{{!item.unlocked}}">
+          <text>{{item.lockText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card edit-card" style="{{themeCardStyle}}">
+    <view class="section-head">
+      <view>
+        <text class="section-title">专属计时器</text>
+        <text class="section-sub">选择学习时的专属计时界面，部分在商城或会员中心解锁。</text>
+      </view>
+    </view>
+
+    <view class="theme-grid">
+      <view
+        class="theme-option {{selectedTimerSkinId === item.id ? 'active' : ''}} {{!item.unlocked ? 'locked' : ''}}"
+        wx:for="{{timerSkinList}}"
+        wx:key="id"
+        bindtap="onSelectTimerSkin"
+        data-item="{{item}}"
+      >
+        <view class="theme-preview skin-preview" style="background: {{item.previewBg}}; display: flex; align-items: center; justify-content: center;">
+          <text style="font-size: 40rpx;">{{item.icon}}</text>
+        </view>
+        <view class="theme-copy">
+          <text class="theme-name">{{item.name}}</text>
+          <text class="theme-desc">{{item.desc}}</text>
+        </view>
+        <text class="theme-tag {{item.unlockType === 'shop' ? 'shop' : (item.unlockType === 'member' ? 'member' : 'default')}}">{{item.badgeText}}</text>
+        <view class="theme-check" wx:if="{{selectedTimerSkinId === item.id && item.unlocked}}">当前</view>
+        <view class="theme-lock" wx:if="{{!item.unlocked}}">
+          <text>{{item.lockText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card edit-card form-card" style="{{themeCardStyle}}">
+    <view class="form-group">
+      <text class="form-label">昵称（必填）</text>
+      <input
+        class="form-input"
+        value="{{nickname}}"
+        placeholder="你希望别人怎么称呼你？"
+        maxlength="10"
+        bindinput="onInputName"
+      />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">性别</text>
+      <picker mode="selector" range="{{genderList}}" value="{{genderIndex}}" bindchange="onChangeGender">
+        <view class="form-picker">
+          <text>{{genderList[genderIndex]}}</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group no-border">
+      <text class="form-label">个性签名</text>
+      <input
+        class="form-input"
+        value="{{motto}}"
+        placeholder="写一句给自己打气的话"
+        maxlength="20"
+        bindinput="onInputMotto"
+      />
+    </view>
+  </view>
+
+  <view class="btn-wrap">
+    <button class="btn-primary" bindtap="onSave">保存设置</button>
+  </view>
+</view>

@@ -1,0 +1,220 @@
+.container {
+  min-height: 100vh;
+  background: #0f1923;
+  padding-bottom: 40rpx;
+}
+
+/* ===== 头像区域 ===== */
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0 50rpx;
+  overflow: hidden;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 360rpx;
+  background: linear-gradient(135deg, #1a2a6c 0%, #7020e0 50%, #3c056e 100%);
+  opacity: 0.85;
+}
+
+.hero-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22849f, #2d869e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border: 6rpx solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8rpx 40rpx rgba(253, 187, 45, 0.4);
+}
+
+.avatar-char {
+  font-size: 64rpx;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.hero-name {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #ffffff;
+  margin-top: 24rpx;
+  z-index: 2;
+  letter-spacing: 4rpx;
+}
+
+.hero-motto {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 12rpx;
+  z-index: 2;
+  font-style: italic;
+}
+
+/* ===== 标签 ===== */
+.tags-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  padding: 30rpx 40rpx;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: 0.1s;
+}
+
+.tag {
+  font-size: 22rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 24rpx;
+  font-weight: 600;
+}
+
+.tag-dev {
+  background: rgba(52, 152, 219, 0.15);
+  color: #3498db;
+  border: 1rpx solid rgba(52, 152, 219, 0.3);
+}
+
+.tag-football {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  border: 1rpx solid rgba(46, 204, 113, 0.3);
+}
+
+.tag-code {
+  background: rgba(253, 187, 45, 0.15);
+  color: #fdbb2d;
+  border: 1rpx solid rgba(253, 187, 45, 0.3);
+}
+
+/* ===== 信息卡片 ===== */
+.info-card {
+  margin: 10rpx 30rpx;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 24rpx;
+  padding: 10rpx 30rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.08);
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: 0.2s;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.06);
+}
+
+.info-icon-wrap {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.info-icon {
+  font-size: 32rpx;
+}
+
+.info-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 4rpx;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.info-action {
+  padding: 8rpx 24rpx;
+  border-radius: 16rpx;
+  background: rgba(52, 152, 219, 0.2);
+  border: 1rpx solid rgba(52, 152, 219, 0.4);
+}
+
+.info-action text {
+  font-size: 22rpx;
+  color: #3498db;
+  font-weight: 600;
+}
+
+/* ===== 酷炫语录 ===== */
+.quote-card {
+  margin: 30rpx;
+  padding: 40rpx;
+  background: linear-gradient(135deg, rgba(253, 187, 45, 0.1), rgba(231, 76, 60, 0.1));
+  border-radius: 24rpx;
+  border: 1rpx solid rgba(253, 187, 45, 0.15);
+  text-align: center;
+  position: relative;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: 0.3s;
+}
+
+.quote-mark {
+  font-size: 60rpx;
+  color: #fdbb2d;
+  font-family: Georgia, serif;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.quote-content {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  padding: 10rpx 20rpx;
+}
+
+.quote-mark-end {
+  font-size: 60rpx;
+  color: #fdbb2d;
+  font-family: Georgia, serif;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+/* ===== 底部 ===== */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 0 20rpx;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: 0.4s;
+}
+
+.footer-text {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-version {
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.15);
+  margin-top: 8rpx;
+}

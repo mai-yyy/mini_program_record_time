@@ -1,0 +1,130 @@
+<view class="container">
+  <view class="hero-card">
+    <view class="hero-copy">
+      <text class="hero-sub">我的可用点数</text>
+      <view class="hero-val-wrap">
+        <text class="hero-val">{{points}}</text>
+        <text class="hero-unit">点</text>
+      </view>
+    </view>
+    <view class="hero-metrics">
+      <view class="metric-pill">
+        <text class="metric-label">会员倍率</text>
+        <text class="metric-value">×{{currentMultiplier}}</text>
+      </view>
+      <view class="metric-pill">
+        <text class="metric-label">盲盒返还</text>
+        <text class="metric-value">+{{blindBoxBonusPoints}}</text>
+      </view>
+      <view class="metric-pill">
+        <text class="metric-label">商城已消费</text>
+        <text class="metric-value">-{{spentPoints}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card blindbox-card">
+    <view class="section-head">
+      <view>
+        <text class="section-title">🎉 神秘盲盒</text>
+        <text class="section-sub">奖池点数公开展示，抽中后直接返还到可用点数</text>
+      </view>
+      <view class="blindbox-price">
+        <text>{{blindBoxCost}} 点/次</text>
+      </view>
+    </view>
+
+    <view class="blindbox-main">
+      <view class="blindbox-showcase">
+        <view class="blindbox-icon">🎊</view>
+        <view class="blindbox-texts">
+          <text class="blindbox-title">今日还可免费抽 {{maxFreePulls - usedFreePulls}} 次</text>
+          <text class="blindbox-desc">先扣次数，再根据概率发放对应点数。没有免费次数时按 2 点一次开启。</text>
+        </view>
+      </view>
+      <button class="blindbox-open-btn {{blindBoxButtonDisabled ? 'disabled' : ''}}" bindtap="onOpenBlindBox" disabled="{{blindBoxButtonDisabled}}">{{blindBoxButtonText}}</button>
+    </view>
+
+    <view class="probability-panel">
+      <text class="probability-title">奖池概率公示</text>
+      <view class="probability-grid">
+        <view class="probability-chip tone-{{item.tone}}" wx:for="{{blindBoxRewards}}" wx:key="label">
+          <text class="probability-points">{{item.label}}</text>
+          <text class="probability-rate">{{item.probability}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-panel" wx:if="{{blindBoxHistory.length > 0}}">
+      <text class="history-title">最近开盒记录</text>
+      <view class="history-list">
+        <view class="history-item" wx:for="{{blindBoxHistory}}" wx:key="createdAt">
+          <text class="history-badge {{item.points > 0 ? 'win' : 'miss'}}">{{item.points > 0 ? '+' + item.points : '0'}} 点</text>
+          <text class="history-meta">{{item.isFree ? '免费开盒' : '付费开盒'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="section-head compact">
+      <view>
+        <text class="section-title">🖼️ 商城头像</text>
+        <text class="section-sub">每个头像 5 点，购买后可在个人信息里选择</text>
+      </view>
+    </view>
+    <view class="goods-grid goods-grid-3">
+      <view class="goods-card" wx:for="{{avatarItems}}" wx:key="id">
+        <view class="goods-icon">{{item.icon}}</view>
+        <text class="goods-name">{{item.name}}</text>
+        <text class="goods-desc">{{item.desc}}</text>
+        <view class="goods-footer">
+          <text class="goods-points">{{item.points}} 点</text>
+          <button class="goods-btn {{(!item.canBuy && !item.owned) || item.owned ? 'disabled' : ''}}" bindtap="onPurchaseItem" data-item="{{item}}" disabled="{{(!item.canBuy && !item.owned) || item.owned}}">{{item.buttonText}}</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="section-head compact">
+      <view>
+        <text class="section-title">🎨 页面底色</text>
+        <text class="section-sub">每个配色 3 点，购买后可改变个人信息页和“我的”页面的大底</text>
+      </view>
+    </view>
+    <view class="goods-grid goods-grid-3">
+      <view class="goods-card theme-card" wx:for="{{themeItems}}" wx:key="id">
+        <view class="theme-preview" style="background: {{item.theme.bg}}"></view>
+        <text class="goods-name">{{item.name}}</text>
+        <text class="goods-desc">{{item.desc}}</text>
+        <view class="goods-footer">
+          <text class="goods-points">{{item.points}} 点</text>
+          <button class="goods-btn {{(!item.canBuy && !item.owned) || item.owned ? 'disabled' : ''}}" bindtap="onPurchaseItem" data-item="{{item}}" disabled="{{(!item.canBuy && !item.owned) || item.owned}}">{{item.buttonText}}</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="section-head compact">
+      <view>
+        <text class="section-title">⏱️ 专属计时器皮肤</text>
+        <text class="section-sub">购买后可在个人信息里选择，应用到未来的计时功能中</text>
+      </view>
+    </view>
+    <view class="goods-grid goods-grid-3">
+      <view class="goods-card" wx:for="{{timerSkinItems}}" wx:key="id">
+        <view class="theme-preview skin-preview" style="background: {{item.skin.previewBg}}">
+          <text class="goods-icon" style="font-size:48rpx;">{{item.icon}}</text>
+        </view>
+        <text class="goods-name">{{item.name}}</text>
+        <text class="goods-desc">{{item.desc}}</text>
+        <view class="goods-footer">
+          <text class="goods-points">{{item.points}} 点</text>
+          <button class="goods-btn {{(!item.canBuy && !item.owned) || item.owned ? 'disabled' : ''}}" bindtap="onPurchaseItem" data-item="{{item}}" disabled="{{(!item.canBuy && !item.owned) || item.owned}}">{{item.buttonText}}</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
